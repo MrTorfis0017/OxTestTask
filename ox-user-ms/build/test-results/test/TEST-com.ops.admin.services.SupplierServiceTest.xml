@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ops.admin.services.SupplierServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-20T11:49:48" hostname="DESKTOP-QAI631V" time="0.026">
+  <properties/>
+  <testcase name="createSupplierTest()" classname="com.ops.admin.services.SupplierServiceTest" time="0.026"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

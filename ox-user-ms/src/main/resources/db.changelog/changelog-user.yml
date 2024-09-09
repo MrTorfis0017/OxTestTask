@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db.changelog/changeset/create-client.yml
+  - include:
+      file: db.changelog/changeset/create-contact.yml
+  - include:
+      file: db.changelog/changeset/create-task.yml

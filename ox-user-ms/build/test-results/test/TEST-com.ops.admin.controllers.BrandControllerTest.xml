@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ops.admin.controllers.BrandControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-20T11:49:45" hostname="DESKTOP-QAI631V" time="0.296">
+  <properties/>
+  <testcase name="createBrandTest()" classname="com.ops.admin.controllers.BrandControllerTest" time="0.296"/>
+  <system-out><![CDATA[
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2024-08-20T14:49:43.196+03:00  INFO 21116 --- [    Test worker] c.o.a.controllers.BrandControllerTest    : Starting BrandControllerTest using Java 19.0.2 with PID 21116 (started by MrTorfis0017 in D:\OPS\ops-store\ops-admin-ms)
+2024-08-20T14:49:43.196+03:00  INFO 21116 --- [    Test worker] c.o.a.controllers.BrandControllerTest    : No active profile set, falling back to 1 default profile: "default"
+2024-08-20T14:49:45.853+03:00  INFO 21116 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@770eb86a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b2efd5a, org.springframework.security.web.context.SecurityContextHolderFilter@6c23fe44, org.springframework.security.web.header.HeaderWriterFilter@427ec1d4, org.springframework.web.filter.CorsFilter@57dc82ea, org.springframework.security.web.csrf.CsrfFilter@38f28492, org.springframework.security.web.authentication.logout.LogoutFilter@53d13a8e, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1ce099e5, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@16897e64, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@ebee1e7, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@bdefef6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@2b1b92f9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@14a86e76, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b758cdb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2954b218, org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter@64471776, org.springframework.security.web.access.ExceptionTranslationFilter@2b7b939e, org.springframework.security.web.access.intercept.AuthorizationFilter@420f795d]
+2024-08-20T14:49:45.931+03:00  INFO 21116 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-08-20T14:49:45.931+03:00  INFO 21116 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-08-20T14:49:45.947+03:00  INFO 21116 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 16 ms
+2024-08-20T14:49:45.978+03:00  INFO 21116 --- [    Test worker] c.o.a.controllers.BrandControllerTest    : Started BrandControllerTest in 3.398 seconds (process running for 5.004)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

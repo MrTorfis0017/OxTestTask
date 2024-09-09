@@ -1,0 +1,2 @@
+rootProject.name = 'OxTestTask'
+include("ox-user-ms")

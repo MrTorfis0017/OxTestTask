@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_task_table
+      author: aleksandrPob
+      changes:
+        - createTable:
+            tableName: TASK
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: PK_TASK
+              - column:
+                  name: DESCRIPTION
+                  type: VARCHAR(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: WORK_STATUS
+                  type: VARCHAR(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: END_DATE
+                  type: VARCHAR(100)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: CONTACT_ID
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    unique: false
+                    foreignKeyName: FK_TASK_CONTACT_ID
+                    references: CONTACT(ID)

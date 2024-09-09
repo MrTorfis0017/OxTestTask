@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ops.admin.controllers.CategoryControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-20T11:49:46" hostname="DESKTOP-QAI631V" time="0.017">
+  <properties/>
+  <testcase name="createCategoryTest()" classname="com.ops.admin.controllers.CategoryControllerTest" time="0.017"/>
+  <system-out><![CDATA[
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2024-08-20T14:49:46.335+03:00  INFO 21116 --- [    Test worker] c.o.a.c.CategoryControllerTest           : Starting CategoryControllerTest using Java 19.0.2 with PID 21116 (started by MrTorfis0017 in D:\OPS\ops-store\ops-admin-ms)
+2024-08-20T14:49:46.335+03:00  INFO 21116 --- [    Test worker] c.o.a.c.CategoryControllerTest           : No active profile set, falling back to 1 default profile: "default"
+2024-08-20T14:49:46.569+03:00  INFO 21116 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@674d8dcd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@30a8a85, org.springframework.security.web.context.SecurityContextHolderFilter@7b99b7d4, org.springframework.security.web.header.HeaderWriterFilter@6f690452, org.springframework.web.filter.CorsFilter@944f8b3, org.springframework.security.web.csrf.CsrfFilter@44ed1a46, org.springframework.security.web.authentication.logout.LogoutFilter@25944da8, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@528fda40, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@1733bee1, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@7f237019, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1163fa87, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@224a4fb8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@578abdcb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@368f3390, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@29e28dd9, org.springframework.security.oauth2.client.web.OAuth2AuthorizationCodeGrantFilter@4bbc0320, org.springframework.security.web.access.ExceptionTranslationFilter@5066205a, org.springframework.security.web.access.intercept.AuthorizationFilter@5571344b]
+2024-08-20T14:49:46.569+03:00  INFO 21116 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-08-20T14:49:46.569+03:00  INFO 21116 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-08-20T14:49:46.569+03:00  INFO 21116 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2024-08-20T14:49:46.585+03:00  INFO 21116 --- [    Test worker] c.o.a.c.CategoryControllerTest           : Started CategoryControllerTest in 0.286 seconds (process running for 5.607)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db.changelog/changeset/create-contact.yml
   - include:
       file: db.changelog/changeset/create-task.yml
+  - include:
+      file: db.changelog/changeset/create-user-related-tables.yml

@@ -14,3 +14,10 @@ spring:
         format_sql: true
   liquibase:
     change-log: classpath:db.changelog/changelog-user.yml
+jwt:
+  secret: "sai'jfdslkgo32941;'';slg`0ws;'0sqa;"
+  tokenExpire: 60
+  refreshTokenExpire: 7
+password:
+  encode:
+    strength: ${STRENGTH:-1}

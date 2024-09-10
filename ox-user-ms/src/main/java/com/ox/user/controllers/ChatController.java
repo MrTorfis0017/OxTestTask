@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@RestController("/api/chat")
+@RestController
 public class ChatController {
 
-    @MessageMapping
+    @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public Message deleteClient(@Payload Message message) {
         message.setTimeStamp(new Date());

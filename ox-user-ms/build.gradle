@@ -27,6 +27,8 @@ configurations {
 dependencies {
 //	implementation 'redis.clients:jedis:5.1.5'
 //	implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.3.3'
+	implementation 'org.webjars:stomp-websocket:2.3.4'
+	implementation 'org.webjars:sockjs-client:1.5.1'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket:3.3.3'
 	testImplementation 'org.springframework.security:spring-security-test:6.3.1'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

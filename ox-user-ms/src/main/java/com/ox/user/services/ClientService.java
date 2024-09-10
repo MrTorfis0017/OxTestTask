@@ -4,8 +4,11 @@ import com.ox.user.converters.ClientConverter;
 import com.ox.user.dto.ClientDTO;
 import com.ox.user.entities.Client;
 import com.ox.user.repositories.ClientRepository;
+import com.ox.user.repositories.specifications.ClientSpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +34,9 @@ public class ClientService {
 
     public void delete(Long id) {
         clientRepository.deleteById(id);
+    }
+
+    public List<ClientDTO> searchByName(String name) {
+        return clientRepository.findAll(ClientSpecifications.hasName(name)).stream().map(clientConverter::toDTO).toList();
     }
 }

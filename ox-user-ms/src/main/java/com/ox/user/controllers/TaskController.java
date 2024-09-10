@@ -28,4 +28,13 @@ public class TaskController {
     public TaskDTO createContact(@RequestBody TaskDTO taskDTO) {
         return taskService.create(taskDTO);
     }
+
+    @Operation(description = "Update task. Status, related contact and so on.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @PostMapping("/update")
+    public TaskDTO changeStatus(@RequestBody TaskDTO taskDTO) {
+        return taskService.update(taskDTO);
+    }
 }

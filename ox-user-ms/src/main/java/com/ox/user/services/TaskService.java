@@ -19,4 +19,9 @@ public class TaskService {
         Task task = taskRepository.save(taskConverter.fromDTO(taskDTO));
         return taskConverter.toDTO(task);
     }
+
+    public TaskDTO update(TaskDTO taskDTO) {
+        Task task = taskRepository.save(taskConverter.fromDTO(taskDTO));
+        return taskConverter.toDTO(task);
+    }
 }

@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 //@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
@@ -51,4 +53,14 @@ public class ClientController {
     public void deleteClient(@PathVariable Long id) {
         clientService.delete(id);
     }
+
+    @Operation(description = "Search client by name")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/find-by-name/{name}")
+    public List<ClientDTO> deleteClient(@PathVariable String name) {
+        return clientService.searchByName(name);
+    }
+
 }

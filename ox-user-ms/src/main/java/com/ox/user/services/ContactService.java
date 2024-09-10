@@ -19,4 +19,17 @@ public class ContactService {
         Contact contact = contactRepository.save(contactConverter.fromDTO(contactDTO));
         return contactConverter.toDTO(contact);
     }
+
+    public ContactDTO update(ContactDTO contactDTO) {
+        Contact contact = contactRepository.save(contactConverter.fromDTO(contactDTO));
+        return contactConverter.toDTO(contact);
+    }
+
+    public ContactDTO get(Long id) {
+        return contactConverter.toDTO(contactRepository.getReferenceById(id));
+    }
+
+    public void delete(Long id) {
+        contactRepository.deleteById(id);
+    }
 }

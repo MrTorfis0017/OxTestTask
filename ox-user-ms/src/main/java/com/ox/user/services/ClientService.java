@@ -19,4 +19,17 @@ public class ClientService {
         Client client = clientRepository.save(clientConverter.fromDTO(clientDTO));
         return clientConverter.toDTO(client);
     }
+
+    public ClientDTO update(ClientDTO clientDTO) {
+        Client client = clientRepository.save(clientConverter.fromDTO(clientDTO));
+        return clientConverter.toDTO(client);
+    }
+
+    public ClientDTO get(Long id) {
+        return clientConverter.toDTO(clientRepository.getReferenceById(id));
+    }
+
+    public void delete(Long id) {
+        clientRepository.deleteById(id);
+    }
 }

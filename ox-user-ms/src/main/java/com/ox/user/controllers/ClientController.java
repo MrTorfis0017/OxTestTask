@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 //@PreAuthorize("hasRole('ADMIN')")
@@ -26,5 +23,32 @@ public class ClientController {
     @PostMapping("/create")
     public ClientDTO createClient(@RequestBody ClientDTO clientDTO) {
         return clientService.create(clientDTO);
+    }
+
+    @Operation(description = "Update client")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @PutMapping("/update")
+    public ClientDTO updateClient(@RequestBody ClientDTO clientDTO) {
+        return clientService.update(clientDTO);
+    }
+
+    @Operation(description = "Get client by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/get/{id}")
+    public ClientDTO getClient(@PathVariable Long id) {
+        return clientService.get(id);
+    }
+
+    @Operation(description = "Delete client by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @DeleteMapping("/delete/{id}")
+    public void deleteClient(@PathVariable Long id) {
+        clientService.delete(id);
     }
 }

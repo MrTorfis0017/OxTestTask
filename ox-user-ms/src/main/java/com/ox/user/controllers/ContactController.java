@@ -8,10 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 //@PreAuthorize("hasRole('ADMIN')")
@@ -28,5 +25,32 @@ public class ContactController {
     @PostMapping("/create")
     public ContactDTO createContact(@RequestBody ContactDTO contactDTO) {
         return contactService.create(contactDTO);
+    }
+
+    @Operation(description = "Update contact")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @PutMapping("/update")
+    public ContactDTO updateClient(@RequestBody ContactDTO contactDTO) {
+        return contactService.update(contactDTO);
+    }
+
+    @Operation(description = "Get contact by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/get/{id}")
+    public ContactDTO getContact(@PathVariable Long id) {
+        return contactService.get(id);
+    }
+
+    @Operation(description = "Delete contact by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @DeleteMapping("/delete/{id}")
+    public void deleteClient(@PathVariable Long id) {
+        contactService.delete(id);
     }
 }

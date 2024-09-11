@@ -1,8 +1,7 @@
 package com.ox.user.services;
 
-import com.ox.user.converters.UserConverter;
-import com.ox.user.entities.UserTh;
-import com.ox.user.repositories.UserThRepository;
+import com.ox.user.entities.User;
+import com.ox.user.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,9 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private final UserThRepository userRepository;
-
-    private final UserConverter userConverter;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -23,7 +20,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDetails findByEmail(String username) {
-        UserTh user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }

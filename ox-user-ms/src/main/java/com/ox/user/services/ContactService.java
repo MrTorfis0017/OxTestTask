@@ -1,11 +1,9 @@
 package com.ox.user.services;
 
 import com.ox.user.converters.ContactConverter;
-import com.ox.user.dto.ClientDTO;
 import com.ox.user.dto.ContactDTO;
 import com.ox.user.entities.Contact;
 import com.ox.user.repositories.ContactRepository;
-import com.ox.user.repositories.specifications.ClientSpecifications;
 import com.ox.user.repositories.specifications.ContactSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -31,7 +31,7 @@ public class ContactController {
             @ApiResponse(responseCode = "200", description = "Success|OK")
     })
     @PutMapping("/update")
-    public ContactDTO updateClient(@RequestBody ContactDTO contactDTO) {
+    public ContactDTO updateContact(@RequestBody ContactDTO contactDTO) {
         return contactService.update(contactDTO);
     }
 
@@ -57,7 +57,6 @@ public class ContactController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success|OK")
     })
-
     @GetMapping("/find-all")
     public List<ContactDTO> findAllContacts() {
         return contactService.findAll();

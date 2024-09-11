@@ -1,6 +1,6 @@
 package com.ox.user.thymeleaf;
 
-import com.ox.user.entities.UserTh;
+import com.ox.user.entities.User;
 import com.ox.user.services.AuthServiceThymeleaf;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,14 +17,14 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new UserTh());
+        model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserTh userTh, Model model) {
+    public String registerUser(@ModelAttribute User user, Model model) {
         try {
-            authServiceThymeleaf.registerUser(userTh.getUsername(), userTh.getPassword());
+            authServiceThymeleaf.registerUser(user.getUsername(), user.getPassword());
             return "redirect:/login";
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", "Username already exists");

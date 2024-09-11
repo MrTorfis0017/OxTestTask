@@ -6,8 +6,6 @@ databaseChangeLog:
   - include:
       file: db.changelog/changeset/create-task.yml
   - include:
-      file: db.changelog/changeset/create-user-related-tables.yml
-  - include:
       file: db.changelog/changeset/create-user.yml
   - include:
       file: db.changelog/changeset/create-change-log.yml

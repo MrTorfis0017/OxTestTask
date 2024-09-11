@@ -8,6 +8,11 @@ public class ClientSpecifications {
 
     public static Specification<Client> hasName(String name) {
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(criteriaBuilder.lower(root.get("companyName")), "%" + name + "%");
+                criteriaBuilder.like(criteriaBuilder.lower(root.get("companyName")), "%" + name.toLowerCase() + "%");
+    }
+
+    public static Specification<Client> hasAddress(String address) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.like(criteriaBuilder.lower(root.get("address")), "%" + address.toLowerCase() + "%");
     }
 }

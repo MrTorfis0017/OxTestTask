@@ -9,10 +9,16 @@
 <button onclick="window.location.href='/'">Back to Home</button>
 <button onclick="window.location.href='/contacts/create'">Add Contact</button>
 <div id="contactsList">
-    <h2>Contact List</h2>
+    <h2>Client List</h2>
     <ul>
-        <li th:each="contact : ${contacts}">
-            <a th:href="@{/contact/{id}(id=${contact.id})}" th:text="${contact.firstName} + ' ' + ${contact.lastName}"></a>
+        <li th:each="item : ${contacts}">
+            <p>
+                <strong>ID:</strong> <span th:text="${item.id}"></span> <br>
+                <strong>Company Name:</strong> <span th:text="${item.firstName}"></span> <br>
+                <strong>Contacts:</strong> <span th:text="${item.lastName}"></span> <br>
+                <strong>Contacts:</strong> <span th:text="${item.phoneNumber}"></span> <br>
+                <button th:onclick="'window.location.href=\'/contact/' + ${item.id} + '\';'">View Details</button>
+            </p>
         </li>
     </ul>
 </div>

@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ClientsController {
@@ -15,7 +17,9 @@ public class ClientsController {
     private final ClientService clientService;
 
     @GetMapping("/clients")
-    public String showClientsPage() {
+    public String getAllClients(Model model) {
+        List<ClientDTO> clients = clientService.findAll();
+        model.addAttribute("clients", clients);
         return "client/clients";
     }
 

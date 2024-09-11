@@ -40,6 +40,10 @@ public class ClientService {
         return clientRepository.findAll(ClientSpecifications.hasName(name)).stream().map(clientConverter::toDTO).toList();
     }
 
+    public List<ClientDTO> searchByAddress(String name) {
+        return clientRepository.findAll(ClientSpecifications.hasAddress(name)).stream().map(clientConverter::toDTO).toList();
+    }
+
     public List<ClientDTO> findAll() {
         return clientRepository.findAll().stream().map(clientConverter::toDTO).toList();
     }

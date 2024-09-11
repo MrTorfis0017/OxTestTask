@@ -16,8 +16,15 @@
     </p>
     <p>
         <label for="workStatus">Work Status:</label>
-        <input type="text" id="workStatus" name="workStatus" th:value="${task.workStatus}"/>
+        <select id="workStatus" name="workStatus" th:field="*{task.workStatus}" required>
+            <option value="OPEN">OPEN</option>
+            <option value="IN_WORK">IN_WORK</option>
+            <option value="COMPLETED">COMPLETED</option>
+        </select>
     </p>
+
+
+
     <p>
         <label for="endDate">End Date:</label>
         <input type="date" id="endDate" name="endDate" th:value="${#dates.format(task.endDate, 'yyyy-MM-dd')}"/>

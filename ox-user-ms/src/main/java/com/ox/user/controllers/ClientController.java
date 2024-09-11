@@ -58,9 +58,18 @@ public class ClientController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success|OK")
     })
-    @DeleteMapping("/find-by-name/{name}")
-    public List<ClientDTO> deleteClient(@PathVariable String name) {
+    @GetMapping("/find-by-name/{name}")
+    public List<ClientDTO> findByName(@PathVariable String name) {
         return clientService.searchByName(name);
+    }
+
+    @Operation(description = "Search client by address")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/find-by-address/{address}")
+    public List<ClientDTO> findByAddress(@PathVariable String address) {
+        return clientService.searchByAddress(address);
     }
 
     @Operation(description = "Find all clients")

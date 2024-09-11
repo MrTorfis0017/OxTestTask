@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Create Task</title>
@@ -12,9 +12,9 @@
 
     <label for="workStatus">Work Status:</label>
     <select id="workStatus" name="workStatus" required>
-        <option value="OPEN">Pending</option>
-        <option value="IN_WORK">In Progress</option>
-        <option value="COMPLETED">Completed</option>
+        <option value="OPEN">OPEN</option>
+        <option value="IN_WORK">IN_WORK</option>
+        <option value="COMPLETED">COMPLETED</option>
     </select><br><br>
 
     <label for="endDate">End Date:</label>
@@ -29,7 +29,7 @@
 <button onclick="window.location.href='/'">Back to Home</button>
 
 <script>
-    document.getElementById('createTaskForm').addEventListener('submit', function(event) {
+    document.getElementById('createTaskForm').addEventListener('submit', function (event) {
         event.preventDefault();
 
         const formData = new FormData(this);

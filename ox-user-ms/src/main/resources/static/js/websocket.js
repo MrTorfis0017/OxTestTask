@@ -1,26 +1,19 @@
-// websocket.js
-const socket = new SockJS('/ws');
-const stompClient = new Stomp.over(socket);
+document.addEventListener("DOMContentLoaded", function () {
+    const socket = new SockJS('http://localhost:9071/ws');
+    const stompClient = Stomp.over(socket);
 
-stompClient.connect({}, function (frame) {
-    console.log('Connected: ' + frame);
-
-    stompClient.subscribe('/topic/task-updates', function (message) {
-        const taskUpdate = JSON.parse(message.body);
-        console.log('Task Update:', taskUpdate);
-
-        showNotification(`Task ${taskUpdate.taskId} has been updated. New status: ${taskUpdate.status}`);
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/topic/change-logs', function (message) {
+            const changeLog = JSON.parse(message.body);
+            addChangeLogToSidebar(changeLog);
+        });
     });
+
+    function addChangeLogToSidebar(changeLog) {
+        const logContainer = document.getElementById('changeLogsSidebar');
+        const logItem = document.createElement('li');
+        logItem.textContent = `${new Date(changeLog.timestamp).toLocaleString()}: ${changeLog.details}`;
+        logContainer.appendChild(logItem);
+    }
 });
-
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerText = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.remove();
-    }, 5000);
-}

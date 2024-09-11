@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Logs</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/websocket.js"></script>
+<div id="changeLogsSidebar" style="position: fixed; right: 0; top: 0; width: 300px; height: 100%; background-color: #f4f4f4; border-left: 1px solid #ddd;">
+    <h2>Change Logs</h2>
+    <ul id="changeLogsList">
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/changelogs/find-all')
+            .then(response => response.json())
+            .then(data => {
+                const changeLogsList = document.getElementById('changeLogsList');
+                changeLogsList.innerHTML = '';
+                data.forEach(log => {
+                    const logItem = document.createElement('li');
+                    logItem.innerHTML = `<span>${log.timestamp}</span> - <span>${log.details}</span>`;
+                    changeLogsList.appendChild(logItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching change logs:', error);
+            });
+    });
+</script>
+</body>
+</html>

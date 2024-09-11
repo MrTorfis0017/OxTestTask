@@ -44,5 +44,14 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: false
-                    foreignKeyName: FK_CONTACT_CLIENT_ID
-                    references: CLIENT(ID)
+  - changeSet:
+      id: add_foreign_key_with_cascade
+      author: aleksandrPob
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: CONTACT
+            baseColumnNames: CLIENT_ID
+            constraintName: FK_CONTACT_CLIENT_ID
+            referencedTableName: CLIENT
+            referencedColumnNames: ID
+            onDelete: CASCADE

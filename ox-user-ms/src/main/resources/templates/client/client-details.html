@@ -6,11 +6,10 @@
 </head>
 <body>
 <h1>Client Details</h1>
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="/js/websocket.js"></script>
+<div th:include="change-logs"></div>
 <button onclick="window.location.href='/clients'">Back to clients</button>
 <link rel="stylesheet" href="/templates/styles.css"/>
+
 <form id="updateClientForm">
     <input type="hidden" name="id" th:value="${client.id}"/>
     <p>
@@ -32,8 +31,10 @@
         <button type="button" th:onclick="'window.location.href=\'/contact/' + ${contact.id} + '\';'">View Details
         </button>
     </div>
-    <button type="submit">Update Task</button>
+    <button type="submit">Update Client</button>
 </form>
+
+<button id="deleteClientButton">Delete Client</button>
 
 <script>
     document.getElementById('updateClientForm').addEventListener('submit', function (event) {
@@ -57,12 +58,32 @@
                 if (response.ok) {
                     window.location.href = '/clients';
                 } else {
-                    alert('Failed to update task.');
+                    alert('Failed to update client.');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+    });
+
+    document.getElementById('deleteClientButton').addEventListener('click', function () {
+        const clientId = document.querySelector('input[name="id"]').value;
+
+        if (confirm('Are you sure you want to delete this client?')) {
+            fetch(`/api/client/delete/${clientId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/clients';
+                    } else {
+                        alert('Failed to delete client.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
     });
 </script>
 </body>

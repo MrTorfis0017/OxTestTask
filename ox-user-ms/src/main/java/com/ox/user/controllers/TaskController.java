@@ -1,20 +1,16 @@
 package com.ox.user.controllers;
 
-import com.ox.user.dto.ContactDTO;
 import com.ox.user.dto.TaskDTO;
-import com.ox.user.services.TaskNotificationService;
 import com.ox.user.services.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-//@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 @RequestMapping("/api/task")
 public class TaskController {
@@ -55,5 +51,14 @@ public class TaskController {
     @GetMapping("/find-all")
     public List<TaskDTO> findAllTasks() {
         return taskService.findAll();
+    }
+
+    @Operation(description = "Delete task by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @DeleteMapping("/delete/{id}")
+    public void deleteContact(@PathVariable Long id) {
+        taskService.delete(id);
     }
 }

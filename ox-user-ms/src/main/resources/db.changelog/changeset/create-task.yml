@@ -36,7 +36,17 @@ databaseChangeLog:
                   name: CONTACT_ID
                   type: BIGINT
                   constraints:
-                    nullable: false
+                    nullable: true
                     unique: false
-                    foreignKeyName: FK_TASK_CONTACT_ID
-                    references: CONTACT(ID)
+
+  - changeSet:
+      id: add_foreign_key_with_cascade_task_contact
+      author: aleksandrPob
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: TASK
+            baseColumnNames: CONTACT_ID
+            constraintName: FK_TASK_CONTACT_ID
+            referencedTableName: CONTACT
+            referencedColumnNames: ID
+            onDelete: CASCADE

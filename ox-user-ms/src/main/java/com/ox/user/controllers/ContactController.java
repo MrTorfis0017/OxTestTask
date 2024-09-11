@@ -49,7 +49,7 @@ public class ContactController {
             @ApiResponse(responseCode = "200", description = "Success|OK")
     })
     @DeleteMapping("/delete/{id}")
-    public void deleteClient(@PathVariable Long id) {
+    public void deleteContact(@PathVariable Long id) {
         contactService.delete(id);
     }
 

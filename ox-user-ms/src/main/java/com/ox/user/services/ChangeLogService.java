@@ -14,7 +14,7 @@ public class ChangeLogService {
     private final ChangeLogRepository changeLogRepository;
 
     public List<ChangeLog> getAllChangeLogs() {
-        return changeLogRepository.findAllByOrderByTimestampDesc();
+        return changeLogRepository.findAllByOrderByTimestampAsc();
     }
 
     public void addChangeLog(ChangeLog changeLog) {

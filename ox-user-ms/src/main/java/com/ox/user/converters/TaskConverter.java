@@ -18,7 +18,9 @@ public class TaskConverter {
         result.setDescription(task.getDescription());
         result.setEndDate(task.getEndDate());
         result.setWorkStatus(task.getWorkStatus());
-        result.setContactId(task.getContact().getId());
+        if (task.getContact() != null) {
+            result.setContactId(task.getContact().getId());
+        }
         return result;
     }
 

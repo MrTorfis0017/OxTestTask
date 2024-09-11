@@ -1,12 +1,11 @@
 package com.ox.user.services;
 
-import com.ox.user.dto.WorkStatus;
 import com.ox.user.entities.ChangeLog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 @Service
 @RequiredArgsConstructor
@@ -16,11 +15,7 @@ public class TaskNotificationService {
 
     private final SimpMessagingTemplate messagingTemplate;
 
-    public void notifyTaskUpdated(Long taskId, WorkStatus status, Date endDate) {
-        ChangeLog changeLog = new ChangeLog();
-        changeLog.setDetails("Tasks with id " + taskId + " update status: " + status + " " + endDate);
-        changeLog.setType("UPDATE");
-        changeLog.setTimestamp(new Date());
+    public void notifyTaskUpdated(ChangeLog changeLog) {
         messagingTemplate.convertAndSend("/topic/task-updates", changeLog);
         changeLogService.addChangeLog(changeLog);
     }

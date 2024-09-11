@@ -23,7 +23,7 @@
                 changeLogsList.innerHTML = '';
                 data.forEach(log => {
                     const logItem = document.createElement('li');
-                    logItem.innerHTML = `<span>${log.timestamp}</span> - <span>${log.details}</span>`;
+                    logItem.innerHTML = `<span>${new Date(log.timestamp).toLocaleDateString()}</span>-<span>${log.details}</span>`;
                     changeLogsList.appendChild(logItem);
                 });
             })

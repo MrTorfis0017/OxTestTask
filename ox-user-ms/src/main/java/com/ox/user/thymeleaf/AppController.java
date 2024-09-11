@@ -37,7 +37,7 @@ public class AppController {
         return "task-details";
     }
 
-    @GetMapping("/tasks/create")
+    @GetMapping("/task/create")
     public String showCreateTaskPage() {
         return "create-task";
     }

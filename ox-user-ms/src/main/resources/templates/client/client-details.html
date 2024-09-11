@@ -40,7 +40,6 @@
         event.preventDefault();
 
         const formData = new FormData(this);
-        console.log('Hey')
         fetch('/api/client/update', {
             method: 'PUT',
             headers: {

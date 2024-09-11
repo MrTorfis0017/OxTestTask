@@ -4,16 +4,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/change-logs', function (message) {
+        stompClient.subscribe('/topic/task-updates', function (message) {
             const changeLog = JSON.parse(message.body);
             addChangeLogToSidebar(changeLog);
         });
     });
 
     function addChangeLogToSidebar(changeLog) {
-        const logContainer = document.getElementById('changeLogsSidebar');
+        const logList = document.getElementById('changeLogsList');
         const logItem = document.createElement('li');
         logItem.textContent = `${new Date(changeLog.timestamp).toLocaleString()}: ${changeLog.details}`;
-        logContainer.appendChild(logItem);
+        if (logList.firstChild) {
+            logList.insertBefore(logItem, logList.firstChild);
+        } else {
+            logList.appendChild(logItem);
+        }
     }
 });

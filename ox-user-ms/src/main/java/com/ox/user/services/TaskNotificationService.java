@@ -17,11 +17,11 @@ public class TaskNotificationService {
     private final SimpMessagingTemplate messagingTemplate;
 
     public void notifyTaskUpdated(Long taskId, WorkStatus status, Date endDate) {
-        messagingTemplate.convertAndSend("/topic/task-updates", taskId);
         ChangeLog changeLog = new ChangeLog();
-        changeLog.setDetails("Tasks with id " + taskId + " update status: " + status.name() + " " + endDate);
+        changeLog.setDetails("Tasks with id " + taskId + " update status: " + status + " " + endDate);
         changeLog.setType("UPDATE");
         changeLog.setTimestamp(new Date());
+        messagingTemplate.convertAndSend("/topic/task-updates", changeLog);
         changeLogService.addChangeLog(changeLog);
     }
 }

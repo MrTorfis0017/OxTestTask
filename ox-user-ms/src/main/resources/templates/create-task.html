@@ -33,19 +33,17 @@
         event.preventDefault();
 
         const formData = new FormData(this);
-        const token = localStorage.getItem('Authorization'); // Или cookies.get('Authorization') если используешь куки
 
         fetch('/api/task/create', {
             method: 'POST',
             headers: {
-                'Authorization': token,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 description: formData.get('description'),
                 workStatus: formData.get('workStatus'),
-                endDate: formData.get('endDate'), // Дата как строка
-                contactId: parseInt(formData.get('contactId')) // Преобразуем в число
+                endDate: formData.get('endDate'),
+                contactId: parseInt(formData.get('contactId'))
             })
         })
             .then(response => {

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Contact</title>
+</head>
+<body>
+<h1>Create Contact</h1>
+<form id="createContactForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
+
+    <label for="clientId">Client ID:</label>
+    <input type="number" id="clientId" name="clientId" required><br><br>
+
+    <button type="submit">Create</button>
+</form>
+<button onclick="window.location.href='/contacts'">Back to Contacts</button>
+<button onclick="window.location.href='/'">Back to Home</button>
+
+<script>
+    document.getElementById('createContactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        const token = localStorage.getItem('Authorization'); // Или cookies.get('Authorization') если используешь куки
+
+        fetch('/api/contact/create', {
+            method: 'POST',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phoneNumber: formData.get('phoneNumber'),
+                clientId: parseInt(formData.get('clientId')), // Преобразуем в число
+                tasks: [] // Отправляем пустой список задач
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('Contact created successfully');
+                window.location.href = '/contacts'; // Перенаправление на страницу контактов
+            })
+            .catch(error => {
+                console.error('Error creating contact:', error);
+            });
+    });
+</script>
+</body>
+</html>

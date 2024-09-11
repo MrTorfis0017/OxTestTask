@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity(name = "TASK")
@@ -23,7 +25,7 @@ public class Task {
     private WorkStatus workStatus;
 
     @Column(name = "END_DATE")
-    private String endDate;
+    private Date endDate;
 
     @ManyToOne
     @JoinColumn(name = "CONTACT_ID")

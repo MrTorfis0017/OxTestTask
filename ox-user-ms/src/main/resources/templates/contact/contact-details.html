@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Details</title>
+</head>
+<body>
+<h1>Contact Details</h1>
+<button onclick="window.location.href='/client/' + [[${contact.clientId}]]">Back to Client</button>
+
+<form id="updateContactForm">
+    <input type="hidden" name="id" th:value="${contact.id}"/>
+    <p>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" th:value="${contact.firstName}"/>
+    </p>
+    <p>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" th:value="${contact.lastName}"/>
+    </p>
+    <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${contact.email}"/>
+    </p>
+    <p>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" th:value="${contact.phoneNumber}"/>
+    </p>
+
+    <p>
+        <label for="clientId">Phone Number:</label>
+        <input type="tel" id="clientId" name="clientId" th:value="${contact.clientId}"/>
+    </p>
+
+    <h2>Tasks</h2>
+    <div th:each="task : ${contact.tasks}">
+        <p><strong>Task id:</strong> <span th:text="${task.id}"></span></p>
+        <p><strong>Description:</strong> <span th:text="${task.description}"></span></p>
+        <p><strong>Status:</strong> <span th:text="${task.workStatus}"></span></p>
+        <button type="button" th:onclick="'window.location.href=\'/task/' + ${task.id} + '\';'">View Task</button>
+    </div>
+
+    <button type="submit">Update Contact</button>
+</form>
+
+<script>
+    document.getElementById('updateContactForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('/api/contact/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: formData.get('id'),
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phoneNumber: formData.get('phoneNumber'),
+                clientId: formData.get('clientId'),
+                tasks: formData.get('tasks'),
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/client/' + formData.get('clientId');
+                } else {
+                    alert('Failed to update contact.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
+</body>
+</html>

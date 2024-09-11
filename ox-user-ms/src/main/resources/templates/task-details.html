@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Task</title>
+</head>
+<body>
+<h1>Update Task</h1>
+<button onclick="window.location.href='/tasks'">Back to Tasks</button>
+
+<form id="updateTaskForm">
+    <input type="hidden" name="id" th:value="${task.id}"/>
+    <p>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" th:value="${task.description}"/>
+    </p>
+    <p>
+        <label for="workStatus">Work Status:</label>
+        <input type="text" id="workStatus" name="workStatus" th:value="${task.workStatus}"/>
+    </p>
+    <p>
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" th:value="${#dates.format(task.endDate, 'yyyy-MM-dd')}"/>
+    </p>
+    <p>
+        <label for="contactId">Contact ID:</label>
+        <input type="number" id="contactId" name="contactId" th:value="${task.contactId}"/>
+    </p>
+    <button type="submit">Update Task</button>
+</form>
+<script>
+    document.getElementById('updateTaskForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        console.log('Hey')
+        fetch('/api/task/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: formData.get('id'),
+                description: formData.get('description'),
+                workStatus: formData.get('workStatus'),
+                endDate: formData.get('endDate'),
+                contactId: parseInt(formData.get('contactId')),
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/tasks';
+                } else {
+                    alert('Failed to update task.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>

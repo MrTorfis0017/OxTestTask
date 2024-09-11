@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
     reactStrictMode: false,
     async headers() {
         return [
@@ -21,7 +22,7 @@ const nextConfig = {
         return [
             {
                 source: '/api/:path*',
-                destination: 'http://localhost:9071/:path*'
+                destination: 'http://localhost:9071/api/:path*'
             },
         ];
     },

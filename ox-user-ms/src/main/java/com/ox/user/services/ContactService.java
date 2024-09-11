@@ -7,6 +7,8 @@ import com.ox.user.repositories.ContactRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ContactService {
@@ -31,5 +33,9 @@ public class ContactService {
 
     public void delete(Long id) {
         contactRepository.deleteById(id);
+    }
+
+    public List<ContactDTO> findAll() {
+        return contactRepository.findAll().stream().map(contactConverter::toDTO).toList();
     }
 }

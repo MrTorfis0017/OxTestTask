@@ -1,9 +1,8 @@
 package com.ox.user.services;
 
 import com.ox.user.converters.UserConverter;
-import com.ox.user.dto.UserDTO;
-import com.ox.user.entities.User;
-import com.ox.user.repositories.UserRepository;
+import com.ox.user.entities.UserTh;
+import com.ox.user.repositories.UserThRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserThRepository userRepository;
 
     private final UserConverter userConverter;
 
@@ -23,11 +22,15 @@ public class UserService implements UserDetailsService {
         return findByEmail(username);
     }
 
-    public UserDTO findByEmail(String email) {
-        User user = userRepository.findByEmail(email);
+    public UserDetails findByEmail(String username) {
+        UserTh user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(username);
         }
-        return userConverter.toDTO(user);
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .roles(user.getRole())
+                .build();
     }
 }

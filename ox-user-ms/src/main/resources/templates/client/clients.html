@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>Clients</h1>
+<button id="fetchClients">Load Clients</button>
+<button onclick="window.location.href='/create'">Add Client</button>
+<button onclick="window.location.href='/'">Back to home</button>
+<div id="clientsList"></div>
+
+<script>
+    document.getElementById('fetchClients').addEventListener('click', function() {
+
+        axios.get('/api/client/find-all')
+            .then(response => {
+                const clients = response.data;
+                const clientsList = document.getElementById('clientsList');
+                clientsList.innerHTML = '';
+
+                clients.forEach(client => {
+                    const clientDiv = document.createElement('div');
+                    clientDiv.innerHTML = `
+                        <p>
+                            <strong>Client ID:</strong> ${client.id} <br>
+                            <strong>Company Name:</strong> ${client.companyName} <br>
+                            <strong>Contacts:</strong> ${client.contacts.length} <br>
+                            <button onclick="window.location.href='/client/${client.id}'">View Details</button>
+                        </p>
+                    `;
+                    clientsList.appendChild(clientDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching clients:', error);
+            });
+    });
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@ spring:
     change-log: classpath:db.changelog/changelog-user.yml
 jwt:
   secret: "sai'jfdslkgo32941;'';slg`0ws;'0sqa;"
-  tokenExpire: 600
+  tokenExpire: 6000
   refreshTokenExpire: 7
 password:
   encode:

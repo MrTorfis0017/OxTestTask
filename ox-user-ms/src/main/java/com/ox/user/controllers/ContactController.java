@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 //@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
@@ -52,5 +54,14 @@ public class ContactController {
     @DeleteMapping("/delete/{id}")
     public void deleteClient(@PathVariable Long id) {
         contactService.delete(id);
+    }
+
+    @Operation(description = "Find all contacts")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/find-all")
+    public List<ContactDTO> findAllContacts() {
+        return contactService.findAll();
     }
 }

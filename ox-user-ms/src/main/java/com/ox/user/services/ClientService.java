@@ -39,4 +39,8 @@ public class ClientService {
     public List<ClientDTO> searchByName(String name) {
         return clientRepository.findAll(ClientSpecifications.hasName(name)).stream().map(clientConverter::toDTO).toList();
     }
+
+    public List<ClientDTO> findAll() {
+        return clientRepository.findAll().stream().map(clientConverter::toDTO).toList();
+    }
 }

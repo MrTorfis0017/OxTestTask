@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers(
-                                        "/login", "/register"
+                                        "/login", "/register","/api/client/find-all"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 )

@@ -3,11 +3,12 @@ package com.ox.user.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
-public class ClientDTO {
+public class ClientDTO implements Serializable {
 
     private Long id;
 

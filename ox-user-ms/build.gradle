@@ -1,55 +1,54 @@
 plugins {
-	id 'java'
-	id 'application'
-	id 'org.springframework.boot' version '3.2.4'
-	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 }
 
 group 'com.ops'
 version 'SHAPSHOT-1.0'
 
 java {
-	sourceCompatibility = '19'
+    sourceCompatibility = '19'
 }
 
 application {
-	mainClass = 'com.ox.user.UserApplication'
+    mainClass = 'com.ox.user.UserApplication'
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 dependencies {
-//	implementation 'redis.clients:jedis:5.1.5'
-//	implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.3.3'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.3.3'
-	implementation 'org.springframework.security:spring-security-messaging:6.3.3'
-	implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
-	implementation 'org.springframework.boot:spring-boot-starter-security:3.2.4'
-	implementation 'org.webjars:stomp-websocket:2.3.4'
-	implementation 'org.webjars:sockjs-client:1.5.1'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket:3.3.3'
-	testImplementation 'org.springframework.security:spring-security-test:6.3.1'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-web:3.2.4'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.2.4'
-	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.24.0'
-	implementation 'org.postgresql:postgresql:42.7.4'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	annotationProcessor 'org.projectlombok:lombok'
-	compileOnly 'org.projectlombok:lombok'
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.5.0'
-//	implementation project(':ops-common')
+    implementation 'redis.clients:jedis:5.1.5'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.3.3'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.3.3'
+    implementation 'org.springframework.security:spring-security-messaging:6.3.3'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.2.4'
+    implementation 'org.webjars:stomp-websocket:2.3.4'
+    implementation 'org.webjars:sockjs-client:1.5.1'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket:3.3.3'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.4'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.2.4'
+    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.24.0'
+    implementation 'org.postgresql:postgresql:42.7.4'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.5.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test:6.3.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

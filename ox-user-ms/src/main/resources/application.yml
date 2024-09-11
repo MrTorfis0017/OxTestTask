@@ -1,6 +1,9 @@
 server:
   port: 9071
 spring:
+  cache:
+    redis:
+      time-to-live: 60000
   datasource:
     username: admin
     password: psw

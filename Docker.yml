@@ -10,3 +10,11 @@ services:
       POSTGRES_DB: user
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: psw
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: psw
+    command: [ "redis-server", "--requirepass", "$REDIS_PASSWORD" ]

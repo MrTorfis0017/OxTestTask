@@ -6,6 +6,9 @@ import com.ox.user.entities.Client;
 import com.ox.user.repositories.ClientRepository;
 import com.ox.user.repositories.specifications.ClientSpecifications;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +21,13 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
 
+    @CacheEvict(value = "clients", allEntries = true)
     public ClientDTO create(ClientDTO clientDTO) {
         Client client = clientRepository.save(clientConverter.fromDTO(clientDTO));
         return clientConverter.toDTO(client);
     }
 
+    @CacheEvict(value = "clients", allEntries = true)
     public ClientDTO update(ClientDTO clientDTO) {
         Client client = clientRepository.save(clientConverter.fromDTO(clientDTO));
         return clientConverter.toDTO(client);
@@ -32,6 +37,7 @@ public class ClientService {
         return clientConverter.toDTO(clientRepository.getReferenceById(id));
     }
 
+    @CacheEvict(value = "clients", allEntries = true)
     public void delete(Long id) {
         clientRepository.deleteById(id);
     }
@@ -44,7 +50,13 @@ public class ClientService {
         return clientRepository.findAll(ClientSpecifications.hasAddress(name)).stream().map(clientConverter::toDTO).toList();
     }
 
+    @Cacheable(value = "clients")
     public List<ClientDTO> findAll() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return clientRepository.findAll().stream().map(clientConverter::toDTO).toList();
     }
 }

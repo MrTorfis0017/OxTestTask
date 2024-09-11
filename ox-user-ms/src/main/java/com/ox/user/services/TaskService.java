@@ -7,6 +7,9 @@ import com.ox.user.entities.Task;
 import com.ox.user.repositories.ContactRepository;
 import com.ox.user.repositories.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -23,11 +26,13 @@ public class TaskService {
     private final TaskNotificationService notificationService;
     private final ContactRepository contactRepository;
 
+    @CacheEvict(value = "tasks", allEntries = true)
     public TaskDTO create(TaskDTO taskDTO) {
         Task task = taskRepository.save(taskConverter.fromDTO(taskDTO));
         return taskConverter.toDTO(task);
     }
 
+    @CacheEvict(value = "tasks", allEntries = true)
     public TaskDTO update(TaskDTO taskDTO) {
         Task taskForDifferences = taskRepository.getReferenceById(taskDTO.getId());
         checkDifferences(taskDTO, taskForDifferences);
@@ -35,12 +40,18 @@ public class TaskService {
         return taskConverter.toDTO(task);
     }
 
+    @Cacheable(value = "tasks")
     public List<TaskDTO> findAll() {
         return taskRepository.findAll().stream().map(taskConverter::toDTO).toList();
     }
 
     public TaskDTO get(Long id) {
         return taskConverter.toDTO(taskRepository.getReferenceById(id));
+    }
+
+    @CacheEvict(value = "tasks", allEntries = true)
+    public void delete(Long id) {
+        contactRepository.deleteById(id);
     }
 
     private void checkDifferences(TaskDTO taskDTO, Task taskForDifferences) {
@@ -57,9 +68,5 @@ public class TaskService {
             notificationService.notifyTaskUpdated(changeLog);
         }
 
-    }
-
-    public void delete(Long id) {
-        contactRepository.deleteById(id);
     }
 }

@@ -1,9 +1,12 @@
 package com.ox.user.services;
 
 import com.ox.user.converters.ContactConverter;
+import com.ox.user.dto.ClientDTO;
 import com.ox.user.dto.ContactDTO;
 import com.ox.user.entities.Contact;
 import com.ox.user.repositories.ContactRepository;
+import com.ox.user.repositories.specifications.ClientSpecifications;
+import com.ox.user.repositories.specifications.ContactSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +40,13 @@ public class ContactService {
 
     public List<ContactDTO> findAll() {
         return contactRepository.findAll().stream().map(contactConverter::toDTO).toList();
+    }
+
+    public List<ContactDTO> searchByLastName(String lastname) {
+        return contactRepository.findAll(ContactSpecification.hasLastName(lastname)).stream().map(contactConverter::toDTO).toList();
+    }
+
+    public List<ContactDTO> searchByEmail(String email) {
+        return contactRepository.findAll(ContactSpecification.hasEmail(email)).stream().map(contactConverter::toDTO).toList();
     }
 }

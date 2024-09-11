@@ -1,8 +1,6 @@
 package com.ox.user.controllers;
 
-import com.ox.user.dto.ClientDTO;
 import com.ox.user.dto.ContactDTO;
-import com.ox.user.services.ClientService;
 import com.ox.user.services.ContactService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 @RequestMapping("/api/contact")
 public class ContactController {
@@ -60,8 +57,27 @@ public class ContactController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success|OK")
     })
+
     @GetMapping("/find-all")
     public List<ContactDTO> findAllContacts() {
         return contactService.findAll();
+    }
+
+    @Operation(description = "Search contact by lastname")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/find-by-lastname/{lastname}")
+    public List<ContactDTO> findByFirstName(@PathVariable String lastname) {
+        return contactService.searchByLastName(lastname);
+    }
+
+    @Operation(description = "Search contact by email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success|OK")
+    })
+    @GetMapping("/find-by-email/{email}")
+    public List<ContactDTO> findByAddress(@PathVariable String email) {
+        return contactService.searchByEmail(email);
     }
 }

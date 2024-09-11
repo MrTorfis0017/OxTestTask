@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import Stomp, {Client} from 'stompjs'
 import SockJS from 'sockjs-client'
 import {Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography} from "@mui/material";
+import {getCookieFromBrowser} from "@/functions/utils";
 
 
 const Home = () => {
@@ -12,14 +13,18 @@ const Home = () => {
     const [nickname, setNickname] = useState('');
     const [stompClient, setStompClient] = useState<Client | null>(null);
     useEffect(() => {
-        const socket = new SockJS('http:/localhost:9071/ws');
+        const token = getCookieFromBrowser("Authorization");
+        console.log(token)
+        const socket = new SockJS(`http://localhost:9071/ws`);
+        // const socket = new SockJS(`http://localhost:9071/ws?Authorization=${token}`);
         const client = Stomp.over(socket);
-        client.connect({}, () => {
-            client.subscribe('/topic/messages', (message) => {
-                const receivedMessage = JSON.parse(message.body);
-                setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        if (token)
+            client.connect({}, () => {
+                client.subscribe('/topic/messages', (message) => {
+                    const receivedMessage = JSON.parse(message.body);
+                    setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+                });
             });
-        });
         setStompClient(client);
         return () => {
             client.disconnect(() => {

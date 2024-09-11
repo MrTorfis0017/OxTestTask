@@ -24,7 +24,6 @@ export function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-
     if (!token) {
         const loginUrl = new URL('/auth/login', req.url);
         return NextResponse.redirect(loginUrl);

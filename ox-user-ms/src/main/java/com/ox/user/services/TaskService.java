@@ -4,7 +4,6 @@ import com.ox.user.converters.TaskConverter;
 import com.ox.user.dto.TaskDTO;
 import com.ox.user.entities.ChangeLog;
 import com.ox.user.entities.Task;
-import com.ox.user.repositories.ContactRepository;
 import com.ox.user.repositories.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;

@@ -8,7 +8,6 @@
 <h1>Client Details</h1>
 <div th:include="change-logs"></div>
 <button onclick="window.location.href='/clients'">Back to clients</button>
-<link rel="stylesheet" href="/templates/styles.css"/>
 
 <form id="updateClientForm">
     <input type="hidden" name="id" th:value="${client.id}"/>

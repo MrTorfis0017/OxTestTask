@@ -8,7 +8,6 @@ import com.ox.user.repositories.ContactRepository;
 import com.ox.user.repositories.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,6 @@ public class TaskService {
     private final TaskRepository taskRepository;
 
     private final TaskNotificationService notificationService;
-    private final ContactRepository contactRepository;
 
     @CacheEvict(value = "tasks", allEntries = true)
     public TaskDTO create(TaskDTO taskDTO) {
@@ -51,7 +49,7 @@ public class TaskService {
 
     @CacheEvict(value = "tasks", allEntries = true)
     public void delete(Long id) {
-        contactRepository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 
     private void checkDifferences(TaskDTO taskDTO, Task taskForDifferences) {
@@ -67,6 +65,5 @@ public class TaskService {
             changeLog.setTimestamp(new Date());
             notificationService.notifyTaskUpdated(changeLog);
         }
-
     }
 }

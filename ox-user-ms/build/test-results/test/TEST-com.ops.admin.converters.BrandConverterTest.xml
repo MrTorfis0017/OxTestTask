@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.ops.admin.converters.BrandConverterTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-08-20T11:49:47" hostname="DESKTOP-QAI631V" time="0.012">
-  <properties/>
-  <testcase name="toDTOTest()" classname="com.ops.admin.converters.BrandConverterTest" time="0.01"/>
-  <testcase name="fromDTOTest()" classname="com.ops.admin.converters.BrandConverterTest" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

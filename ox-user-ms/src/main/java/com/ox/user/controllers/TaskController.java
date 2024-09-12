@@ -30,7 +30,7 @@ public class TaskController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success|OK")
     })
-    @PostMapping("/update")
+    @PutMapping("/update")
     public TaskDTO changeStatus(@RequestBody TaskDTO taskDTO) {
         return taskService.update(taskDTO);
     }

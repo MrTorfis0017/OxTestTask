@@ -33,12 +33,10 @@
         event.preventDefault();
 
         const formData = new FormData(this);
-        const token = localStorage.getItem('Authorization'); // Или cookies.get('Authorization') если используешь куки
 
         fetch('/api/contact/create', {
             method: 'POST',
             headers: {
-                'Authorization': token,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -46,14 +44,14 @@
                 lastName: formData.get('lastName'),
                 email: formData.get('email'),
                 phoneNumber: formData.get('phoneNumber'),
-                clientId: parseInt(formData.get('clientId')), // Преобразуем в число
-                tasks: [] // Отправляем пустой список задач
+                clientId: parseInt(formData.get('clientId')),
+                tasks: []
             })
         })
             .then(response => response.json())
-            .then(data => {
+            .then(() => {
                 alert('Contact created successfully');
-                window.location.href = '/contacts'; // Перенаправление на страницу контактов
+                window.location.href = '/contacts';
             })
             .catch(error => {
                 console.error('Error creating contact:', error);

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function searchContacts() {
+            const criteria = document.getElementById('searchByCriteria').value;
+            const searchByLastName = document.getElementById('searchByLastName').checked;
+            const searchByEmail = document.getElementById('searchByEmail').checked;
+
+            let url = '/api/contact/find-all';
+            if (searchByLastName && criteria) {
+                url = `/api/contact/find-by-lastname/${criteria}`;
+            } else if (searchByEmail && criteria) {
+                url = `/api/contact/find-by-email/${criteria}`;
+            }
+
+            axios.get(url)
+                .then(response => {
+                    const contacts = response.data;
+                    const contactsList = document.getElementById('contactsList');
+                    contactsList.innerHTML = '';
+                    contacts.forEach(contact => {
+                        const contactDiv = document.createElement('div');
+                        contactDiv.innerHTML = `
+                            <p>
+                                <strong>ID:</strong> ${contact.id} <br>
+                                <strong>First Name:</strong> ${contact.firstName} <br>
+                                <strong>Last Name:</strong> ${contact.lastName} <br>
+                                <strong>Email:</strong> ${contact.email} <br>
+                                <strong>Phone Number:</strong> ${contact.phoneNumber} <br>
+                                <button onclick="window.location.href='/contact/${contact.id}'">View Details</button>
+                            </p>
+                        `;
+                        contactsList.appendChild(contactDiv);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching contacts:', error);
+                });
+        }
+
+        function handleCheckboxChange(event) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== event.target) {
+                    checkbox.disabled = event.target.checked;
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchByLastName').addEventListener('change', handleCheckboxChange);
+            document.getElementById('searchByEmail').addEventListener('change', handleCheckboxChange);
+        });
+    </script>
+</head>
+<body>
+<h1>Contacts</h1>
+<div th:include="change-logs"></div>
+<button onclick="window.location.href='/'">Back to Home</button>
+<button onclick="window.location.href='/contacts/create'">Add Contact</button>
+<div>
+    <input type="text" id="searchByCriteria" placeholder="Enter search data"/>
+    <label for="searchByLastName">
+        <input type="checkbox" id="searchByLastName"/> Search by Last Name
+    </label>
+    <label for="searchByEmail">
+        <input type="checkbox" id="searchByEmail"/> Search by Email
+    </label>
+    <button onclick="searchContacts()">Search</button>
+</div>
+<div id="contactsList">
+    <h2>Contacts List</h2>
+    <ul>
+        <li th:each="item : ${contacts}">
+            <p>
+                <strong>ID:</strong> <span th:text="${item.id}"></span> <br>
+                <strong>First Name:</strong> <span th:text="${item.firstName}"></span> <br>
+                <strong>Last Name:</strong> <span th:text="${item.lastName}"></span> <br>
+                <strong>Email:</strong> <span th:text="${item.email}"></span> <br>
+                <strong>Phone Number:</strong> <span th:text="${item.phoneNumber}"></span> <br>
+                <button th:onclick="'window.location.href=\'/contact/' + ${item.id} + '\';'">View Details</button>
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

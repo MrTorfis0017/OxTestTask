@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Details</title>
+</head>
+<body>
+<h1>Client Details</h1>
+<div th:include="change-logs"></div>
+<button onclick="window.location.href='/clients'">Back to clients</button>
+
+<form id="updateClientForm">
+    <input type="hidden" name="id" th:value="${client.id}"/>
+    <p>
+        <label for="companyName">Company name:</label>
+        <input type="text" id="companyName" name="companyName" th:value="${client.companyName}"/>
+    </p>
+    <p>
+        <label for="industry">Industry:</label>
+        <input type="text" id="industry" name="industry" th:value="${client.industry}"/>
+    </p>
+    <p>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" th:value="${client.address}"/>
+    </p>
+    <h2>Contacts</h2>
+    <div th:each="contact : ${client.contacts}">
+        <p><strong>Contact id:</strong> <span th:text="${contact.id}"></span></p>
+        <p><strong>Name:</strong> <span th:text="${contact.firstName}"></span></p>
+        <button type="button" th:onclick="'window.location.href=\'/contact/' + ${contact.id} + '\';'">View Details
+        </button>
+    </div>
+    <button type="submit">Update Client</button>
+</form>
+
+<button id="deleteClientButton">Delete Client</button>
+
+<script>
+    document.getElementById('updateClientForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+        fetch('/api/client/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: formData.get('id'),
+                companyName: formData.get('companyName'),
+                industry: formData.get('industry'),
+                address: formData.get('address'),
+                contacts: formData.get('contacts')
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/clients';
+                } else {
+                    alert('Failed to update client.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    document.getElementById('deleteClientButton').addEventListener('click', function () {
+        const clientId = document.querySelector('input[name="id"]').value;
+
+        if (confirm('Are you sure you want to delete this client?')) {
+            fetch(`/api/client/delete/${clientId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/clients';
+                    } else {
+                        alert('Failed to delete client.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    });
+</script>
+</body>
+</html>
